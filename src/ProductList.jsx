@@ -11,7 +11,6 @@ function ProductList({ onHomeClick }) {
     
     // ✅ Get dispatch function and cart items from Redux
     const dispatch = useDispatch();
-    dispatch(addItem(product));
     const cartItems = useSelector(state => state.cart.items);
     
     // ✅ Calculate total items in cart for the cart icon
@@ -276,6 +275,9 @@ function ProductList({ onHomeClick }) {
             ...prevState,
             [plant.name]: true, // Mark this plant as added
         }));
+    };
+    const calculateTotalQuantity = () => {
+        return CartItems ? CartItems.reduce((total,item) => total + item.quantity,0):0;
     };
 
     return (
